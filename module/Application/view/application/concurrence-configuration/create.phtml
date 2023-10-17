@@ -1,0 +1,29 @@
+<?php
+
+?>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <div>
+            <h3>Nueva configuración</h3>
+        </div>
+        <div>
+            <form method="post" enctype="application/x-www-form-urlencoded">
+                <div class="form-group row">
+                    <label for="" class="col-form-label col-4"># Registros por Hilo</label>
+                    <div class="col-4">
+                        <input id="relation" name="relation" type="text" class="form-control"
+                               placeholder="<?= number_format(25000, 0) ?>" required>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-success" type="submit">
+                            <i class="fa fa-arrow-circle-left"></i> Registrar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+

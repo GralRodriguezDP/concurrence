@@ -1,0 +1,44 @@
+<?php
+    $configurations = $this->result;
+?>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <div class="row">
+            <a href="<?= $this->url('config', ['action' => 'create']) ?>" class="btn btn-success">
+                <i class="fa fa-plus"></i> Nueva Configuración
+            </a>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-sm table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Col1</th>
+                        <th>Col2</th>
+                        <th>Col3</th>
+                        <th>Col4</th>
+                        <th>Col5</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($configurations as $configuration) : ?>
+                    <tr>
+                        <td><?= $configuration[0] ?></td>
+                        <td><?= $configuration[1] ?></td>
+                        <td><?= $configuration[2] ?></td>
+                        <td><?= $configuration[3] ?></td>
+                        <td><?= $configuration[4] ?></td>
+                    </tr>
+                    <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
