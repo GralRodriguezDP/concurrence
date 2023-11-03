@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Application\Controller;
 
 use Laminas\Db\Adapter\Adapter;
+use Laminas\Mvc\Controller\AbstractActionController;
 
-class AbstractController extends \Laminas\Mvc\Controller\AbstractActionController
+class AbstractController extends AbstractActionController
 {
     private Adapter $adapter;
 
@@ -41,10 +44,4 @@ class AbstractController extends \Laminas\Mvc\Controller\AbstractActionControlle
     {
         $this->config = $config;
     }
-
-
-
-
-
-
 }

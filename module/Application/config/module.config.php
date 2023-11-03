@@ -16,6 +16,7 @@ return [
                 'options' => [
                     'route'    => '/',
                     'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
                     ],
@@ -26,17 +27,8 @@ return [
                 'options' => [
                     'route'    => '/application[/:action]',
                     'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
                         'controller' => Controller\IndexController::class,
-                        'action'     => 'index',
-                    ],
-                ],
-            ],
-            'config' => [
-                'type'    => Segment::class,
-                'options' => [
-                    'route'    => '/config[/:action]',
-                    'defaults' => [
-                        'controller' => Controller\ConcurrenceConfigurationController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -46,7 +38,6 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => AbstractControllerFactory::class,
-            Controller\ConcurrenceConfigurationController::class => AbstractControllerFactory::class,
         ],
     ],
     'view_manager' => [
@@ -62,7 +53,10 @@ return [
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],
         'template_path_stack' => [
-            __DIR__ . '/../view',
+            'Application' => __DIR__ . '/../view',
+        ],
+        'strategies' => [
+            'ViewJsonStrategy',
         ],
     ],
 ];

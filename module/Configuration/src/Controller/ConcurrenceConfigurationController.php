@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Application\Controller;
+namespace Configuration\Controller;
 
+use Application\Controller\AbstractController;
 use DateTime;
 use Exception;
 use Laminas\Db\Sql\Sql;
@@ -14,35 +15,42 @@ class ConcurrenceConfigurationController extends AbstractController
 {
     private string $configurationTableName = 'concurence_threads_configuration';
 
-    public function indexAction()
+    /**
+     * @return ViewModel
+     */
+    public function indexAction(): ViewModel
     {
+        $results = null;
         try {
             $adapter = $this->getAdapter();
             $sql = new Sql($adapter);
+            $select = $sql->select($this->configurationTableName);
+            $selectString = $sql->buildSqlString($select);
+            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
 
-            $select = $sql->select()->from($this->configurationTableName);
-
-            $statement = $sql->prepareStatementForSqlObject($select);
-            $result = $statement->execute();
-            $result = $statement->getResource();
+            // $statement = $sql->prepareStatementForSqlObject($select);
+            // $result = $statement->execute();
+            // $result = $statement->getResource();
         } catch (Exception $e) {
             print_r($e);
         }
 
         return new ViewModel(
             [
-                'result' => $result,
+                'results' => $results,
             ]
         );
     }
 
+    /**
+     * @throws Exception
+     */
     public function createAction()
     {
         $request = $this->getRequest();
 
         if ($request->isPost()) {
             $data = $request->getPost();
-            print_r($data);
 
             $relation = isset($data['relation']) ? $data['relation'] : null;
 
@@ -59,12 +67,12 @@ class ConcurrenceConfigurationController extends AbstractController
 
 
             try {
-                $tableGateway = new TableGateway($this->configurationTableName);
                 $adapter = $this->getAdapter();
                 $sql = new Sql($adapter);
                 $insert = $sql->insert($this->configurationTableName);
                 $insert->values($values);
 
+                //$tableGateway = new TableGateway($this->configurationTableName, $adapter);
             } catch (Exception $e) {
                 print_r($e);
             }
